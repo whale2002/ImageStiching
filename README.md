@@ -4,7 +4,7 @@
 
 ## 效果
 
-![preview](https://spacee-1306444757.cos.ap-beijing.myqcloud.com/img/Snipaste_2023-06-24_23-52-45.png)
+![preview](https://spacee-1306444757.cos.ap-beijing.myqcloud.com/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230624235957.png)
 
 ## Github
 
