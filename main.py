@@ -34,8 +34,8 @@ class ImageStitchingGUI:
     menubar.add_cascade(label="添加图片", menu=filemenu)
 
     # 创建拼接按钮
-    self.stitch_button = Button(self.master, text="拼接图片", command=self.stitch_image)
-    self.stitch_button.pack(side='bottom')
+    self.stitch_button = Button(self.master, text="拼接图片", command=self.stitch_image, font=(16))
+    self.stitch_button.pack(side='bottom', padx=30, pady=10)
 
     # 创建图像显示区域
     self.image_frame = Frame(self.master)
@@ -53,7 +53,7 @@ class ImageStitchingGUI:
 
     if filepath:
       self.img1 = cv2.imread(filepath)
-      self.img1 = cv2.resize(self.img1, (300, 200))
+      self.img1 = cv2.resize(self.img1, (300, 320))
         
       self.show_image(self.img1, 0)
 
@@ -69,7 +69,7 @@ class ImageStitchingGUI:
 
     if filepath:
       self.img2 = cv2.imread(filepath)
-      self.img2 = cv2.resize(self.img2, (300, 200))
+      self.img2 = cv2.resize(self.img2, (300, 320))
       self.show_image(self.img2, 1)
 
   def stitch_image(self):
