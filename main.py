@@ -24,14 +24,11 @@ class ImageStitchingGUI:
 
     # 创建文件菜单
     filemenu = Menu(menubar, tearoff=0)
-    filemenu.add_command(label="选择Image 1", command=self.open_image1)
-    filemenu.add_command(label="选择Image 2", command=self.open_image2)
+    menubar.add_command(label="选择Image 1", command=self.open_image1)
+    menubar.add_command(label="选择Image 2", command=self.open_image2)
+    menubar.add_command(label="导出结果", command=self.export_image)
 
-    filemenu.add_separator()
-
-    filemenu.add_command(label="Exit", command=self.master.quit)
-
-    menubar.add_cascade(label="添加图片", menu=filemenu)
+    menubar.add_command(label="Exit", command=self.master.quit)
 
     # 创建拼接按钮
     self.stitch_button = Button(self.master, text="拼接图片", command=self.stitch_image, font=(16))
@@ -84,7 +81,7 @@ class ImageStitchingGUI:
 
     else:
       # 提示用户选择两张图片
-      messagebox.showwarning('Warning', '清先选择两张图片!')
+      messagebox.showwarning('Warning', '请先选择两张图片!')
 
   def show_image(self, img, index):
     # 将OpenCV图像转换为PIL图像
@@ -106,6 +103,27 @@ class ImageStitchingGUI:
     # 保留图像引用，防止被垃圾回收
     if index == 0 or index == 1 or index == 2:
       getattr(self, 'img%d_label' % (index+1)).img = img
+
+  def export_image(self):
+    if not hasattr(self, 'result'):
+      messagebox.showwarning('Warning', '请先合成图片!')
+      return
+
+    # 提示用户选择导出路径
+    filepath = filedialog.asksaveasfilename(
+      initialdir=".",
+      initialfile="result.jpg",
+      title="Export Image",
+      filetypes=(("JPEG files", "*.jpg"), ("PNG files", "*.png"))
+    )
+
+    print(filepath)
+
+    # 判断是否选择了导出路径
+    if filepath:
+      # 保存拼接后的图片到导出路径
+      cv2.imwrite(filepath, self.result)
+      messagebox.showinfo('Success', '图片已成功导出！')
 
 if __name__=='__main__':
   root = Tk()
